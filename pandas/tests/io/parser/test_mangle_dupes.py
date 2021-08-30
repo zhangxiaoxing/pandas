@@ -10,10 +10,7 @@ import pytest
 from pandas import DataFrame
 import pandas._testing as tm
 
-skip_pyarrow = pytest.mark.usefixtures("pyarrow_skip")
 
-
-@skip_pyarrow
 @pytest.mark.parametrize("kwargs", [{}, {"mangle_dupe_cols": True}])
 def test_basic(all_parsers, kwargs):
     # TODO: add test for condition "mangle_dupe_cols=False"
@@ -27,7 +24,6 @@ def test_basic(all_parsers, kwargs):
     tm.assert_frame_equal(result, expected)
 
 
-@skip_pyarrow
 def test_basic_names(all_parsers):
     # See gh-7160
     parser = all_parsers
@@ -48,7 +44,6 @@ def test_basic_names_raise(all_parsers):
         parser.read_csv(StringIO(data), names=["a", "b", "a"])
 
 
-@skip_pyarrow
 @pytest.mark.parametrize(
     "data,expected",
     [
@@ -77,7 +72,6 @@ def test_thorough_mangle_columns(all_parsers, data, expected):
     tm.assert_frame_equal(result, expected)
 
 
-@skip_pyarrow
 @pytest.mark.parametrize(
     "data,names,expected",
     [
@@ -117,7 +111,6 @@ def test_thorough_mangle_names(all_parsers, data, names, expected):
         parser.read_csv(StringIO(data), names=names)
 
 
-@skip_pyarrow
 def test_mangled_unnamed_placeholders(all_parsers):
     # xref gh-13017
     orig_key = "0"

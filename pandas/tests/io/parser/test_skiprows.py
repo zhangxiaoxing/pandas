@@ -17,9 +17,6 @@ from pandas import (
 )
 import pandas._testing as tm
 
-# XFAIL ME PLS once hanging tests issues identified
-pytestmark = pytest.mark.usefixtures("pyarrow_skip")
-
 
 @pytest.mark.parametrize("skiprows", [list(range(6)), 6])
 def test_skip_rows_bug(all_parsers, skiprows):
